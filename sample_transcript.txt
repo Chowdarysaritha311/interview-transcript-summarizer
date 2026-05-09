@@ -1,0 +1,35 @@
+Interviewer: Thanks for joining today. Let's start simple — can you tell me a bit about your background?
+
+Candidate: Sure. I studied Computer Science at VIT, graduated last year. During my final year I interned at a startup where I worked on their backend — mostly Python, some FastAPI, and a PostgreSQL database. After that I spent about six months freelancing, building REST APIs for a couple of small businesses.
+
+Interviewer: What did your work at the startup actually look like day to day?
+
+Candidate: It was a small team, four engineers. I owned the API layer for their inventory management feature. I'd take requirements from the product manager, design the endpoints, write the code, and do code review with one of the senior engineers. We used GitHub Actions for CI, deployed on AWS EC2.
+
+Interviewer: Did you ever deal with performance issues?
+
+Candidate: Yeah, actually. We had a reporting endpoint that was timing out for large date ranges. I traced it down to an N+1 query problem — we were hitting the database once per row in a loop. I rewrote it as a single join query and added a database index on the date column. Response time dropped from around 8 seconds to under 300 milliseconds.
+
+Interviewer: Nice. How comfortable are you with system design concepts? Like, if I asked you to design a URL shortener, where would you start?
+
+Candidate: I'd start with clarifying questions — expected traffic, read-heavy or write-heavy, do we need analytics? Assuming read-heavy, I'd keep it simple: a hash function to generate short codes, store the mapping in a database, add caching with Redis for popular URLs. For scale I'd think about horizontal scaling the API layer and maybe a CDN for redirect latency.
+
+Interviewer: Any concerns about that design?
+
+Candidate: Hash collisions would be my first concern. I'd use a collision-resistant approach — either check-and-retry with a random suffix, or use a counter-based ID and encode it in base62. Also, cache invalidation if someone deletes a URL — you'd need to either TTL the cache entries or actively purge them.
+
+Interviewer: Let's switch to behavioral. Tell me about a time you disagreed with a technical decision.
+
+Candidate: At the startup, my senior engineer wanted to use a NoSQL database for our inventory data. I thought relational made more sense given how relational the data actually was — products, orders, suppliers, lots of joins. I put together a quick comparison doc, nothing fancy, just pros and cons for each option with our specific schema in mind. We talked it through and ended up going with PostgreSQL. He appreciated that I came with reasoning rather than just pushback.
+
+Interviewer: How do you handle feedback on your code?
+
+Candidate: I try to separate the feedback from my ego. Early on I'd sometimes get defensive, but I've gotten better. Now when I get a review comment I don't immediately understand, I'll ask a clarifying question rather than just fixing it without knowing why. I think understanding the reason makes me a better engineer over time.
+
+Interviewer: Last one — where do you want to be in two years?
+
+Candidate: Ideally doing more end-to-end work — not just backend but owning a feature from design through to production monitoring. I want to get more exposure to distributed systems and maybe start mentoring junior engineers once I'm more senior. I don't have a specific title goal, I just want to keep getting better at building things that actually work at scale.
+
+Interviewer: Great, that's all I have. Any questions for me?
+
+Candidate: Yeah — what does the onboarding process look like for engineers joining the team?
